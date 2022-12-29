@@ -17,6 +17,7 @@ class MainFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding.searchView.isIconifiedByDefault = false
     }
 
     override fun onCreateView(
