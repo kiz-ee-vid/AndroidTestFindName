@@ -1,5 +1,7 @@
 package com.example.androidtestfindname.presentation.di.modules
 
+import com.example.androidtestfindname.data.ApiService
+import com.example.androidtestfindname.domain.utils.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,16 +24,16 @@ object NetworkModule {
             .readTimeout(5, TimeUnit.MINUTES).build()
     }
 
-//    @Provides
-//    @Singleton
-//    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
-//        Retrofit.Builder()
-//            .baseUrl(BASE_URL).client(okHttpClient)
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-//
-//    @Provides
-//    @Singleton
-//    fun provideService(retrofitObj: Retrofit): ApiService =
-//        retrofitObj.create(ApiService::class.java)
+    @Provides
+    @Singleton
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
+        Retrofit.Builder()
+            .baseUrl(BASE_URL).client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+    @Provides
+    @Singleton
+    fun provideService(retrofitObj: Retrofit): ApiService =
+        retrofitObj.create(ApiService::class.java)
 }

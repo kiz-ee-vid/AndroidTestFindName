@@ -1,4 +1,4 @@
-package com.example.test_android.presentation.di.components
+package com.example.androidtestfindname.presentation.di.components
 
 import android.app.Application
 import com.example.androidtestfindname.presentation.di.modules.NetworkModule
