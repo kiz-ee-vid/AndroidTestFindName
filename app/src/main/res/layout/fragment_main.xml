@@ -66,7 +66,7 @@
     <Button
         android:id="@+id/button"
         android:layout_width="247dp"
-        android:layout_height="60dp"
+        android:layout_height="55dp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="50dp"
         android:background="@drawable/round_corner"
@@ -82,7 +82,7 @@
     <ImageButton
         android:id="@+id/imageButton2"
         android:layout_width="80dp"
-        android:layout_height="60dp"
+        android:layout_height="55dp"
         android:layout_marginBottom="50dp"
         android:background="@drawable/round_corner"
         android:backgroundTint="@color/green"
