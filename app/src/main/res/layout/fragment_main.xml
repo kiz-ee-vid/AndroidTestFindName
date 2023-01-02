@@ -14,19 +14,23 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="16dp"
         android:background="@color/gray"
+        android:descendantFocusability="afterDescendants"
+        android:focusable="auto"
+        android:queryBackground="@null"
         android:queryHint="@string/search_query_hint"
         android:searchHintIcon="@drawable/ic_search_icon"
         android:searchIcon="@drawable/ic_search_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:queryBackground="@null"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/frame_text"
         android:layout_width="328dp"
         android:layout_height="179dp"
         android:visibility="visible"
         app:cardBackgroundColor="@color/gray"
+        app:cardCornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,6 +49,7 @@
     </androidx.cardview.widget.CardView>
 
     <FrameLayout
+        android:id="@+id/frame_age"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="175dp"
@@ -64,7 +69,7 @@
     </FrameLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_add_to_favourite"
         android:layout_width="247dp"
         android:layout_height="55dp"
         android:layout_marginStart="16dp"
@@ -80,7 +85,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/button_share"
         android:layout_width="80dp"
         android:layout_height="55dp"
         android:layout_marginBottom="50dp"
@@ -92,6 +97,6 @@
         app:circularflow_radiusInDP="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button" />
+        app:layout_constraintStart_toEndOf="@+id/button_add_to_favourite" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

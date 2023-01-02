@@ -6,4 +6,6 @@
     <string name="search_query_hint">Поиск</string>
     <string name="add_to_favourites">Добавить в избранное</string>
     <string name="share_button">ShareButton</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
 </resources>
