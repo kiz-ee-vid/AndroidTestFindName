@@ -16,7 +16,7 @@ class FavouritesAdapter(var itemClick: (Boolean) -> Unit) :
     private var withCheckbox = false
     private var showDeleteButton = false
     var checkedNum = 0
-    private var chosenNames = ArrayList<String>()
+    private var chosenNames = ArrayList<Name>()
 
     inner class MenuHolder(val binding: ItemFavouriteBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -42,11 +42,11 @@ class FavouritesAdapter(var itemClick: (Boolean) -> Unit) :
             checkBox.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
                     checkedNum++
-                    chosenNames.add(namesList[position].name)
+                    chosenNames.add(namesList[position])
                 }
                 else{
                     checkedNum--
-                    chosenNames.remove(namesList[position].name)
+                    chosenNames.remove(namesList[position])
                 }
                 showDeleteButton = checkedNum > 0
                 itemClick(showDeleteButton)
@@ -74,7 +74,7 @@ class FavouritesAdapter(var itemClick: (Boolean) -> Unit) :
         return namesList.size
     }
 
-    fun getChosen(): List<String> {
+    fun getChosen(): List<Name> {
         return chosenNames
     }
 }

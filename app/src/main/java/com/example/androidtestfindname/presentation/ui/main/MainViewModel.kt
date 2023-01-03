@@ -2,7 +2,6 @@ package com.example.androidtestfindname.presentation.ui.main
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.androidtestfindname.data.ApiItem
 import com.example.androidtestfindname.data.RepositoryImpl
 import com.example.androidtestfindname.data.room.Name
 import com.example.androidtestfindname.data.room.NameDatabase
@@ -19,38 +18,52 @@ class MainViewModel @Inject constructor(private val repository: RepositoryImpl) 
 
     private var db: NameDatabase = NameDatabase.getInstance(App.getContext()!!)
     private var nameDao = db.nameDao()
-    val foundedAge = MutableLiveData<ApiItem?>()
-    var favouriteNames = ArrayList<Name>().toMutableList()
 
-    init{
+    val foundedAge = MutableLiveData<Name?>()
+
+    var favouriteNames = ArrayList<Name>().toMutableList()
+    var cachedRequests = ArrayList<Name>()
+
+    init {
         CoroutineScope(Dispatchers.IO).launch() {
             if (nameDao != null) {
                 favouriteNames = nameDao!!.getAll()
-            }
-            else throw Exception("Error, no database")
+            } else throw Exception("Error, no database")
         }
     }
 
     fun getAge(name: String) {
-        CoroutineScope(Dispatchers.IO).launch() {
+        val cacheResult = checkCache(name)
+        if (cacheResult == null)
+            CoroutineScope(Dispatchers.IO).launch() {
                 val data = repository.getAge(name)
                 withContext(Dispatchers.Main) {
-                    foundedAge.value = data
+                    if (data != null) {
+                        foundedAge.value = Name(data.name, data.age ?: 0)
+                    }
                 }
-        }
+            }
+        else foundedAge.value = Name(name, cacheResult)
     }
 
     fun addNameToFavourites() {
-        val data = Name(foundedAge.value!!.name)
+        val data = Name(foundedAge.value!!.name, foundedAge.value!!.age ?: 0)
         if (!favouriteNames.contains(data)) {
             favouriteNames.add(data)
         }
     }
 
-    fun deleteChosen(chosenNames: List<String>) {
+    fun deleteChosen(chosenNames: List<Name>) {
         chosenNames.forEach {
-            favouriteNames.remove(Name(it))
+            favouriteNames.remove(it)
         }
     }
 
+    private fun checkCache(name: String): Byte?{
+        cachedRequests.forEach {
+            if (it.name == name)
+                return it.age
+        }
+        return null
+    }
 }

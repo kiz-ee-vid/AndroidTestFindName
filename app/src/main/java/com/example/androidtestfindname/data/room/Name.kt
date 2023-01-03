@@ -9,5 +9,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Name(
     @PrimaryKey
-    var name: String
+    var name: String,
+    var age: Byte
 ):Parcelable

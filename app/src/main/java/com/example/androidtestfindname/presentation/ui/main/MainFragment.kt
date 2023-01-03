@@ -1,16 +1,13 @@
 package com.example.androidtestfindname.presentation.ui.main
 
-import android.opengl.Visibility
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
 import android.widget.SearchView.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import com.example.androidtestfindname.data.room.Name
 import com.example.androidtestfindname.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -54,6 +51,14 @@ class MainFragment : Fragment() {
 
         binding.buttonAddToFavourite.setOnClickListener {
             viewModel.addNameToFavourites()
+        }
+
+        binding.buttonShare.setOnClickListener {
+            val intent = Intent()
+            intent.action = Intent.ACTION_SEND
+            intent.putExtra(Intent.EXTRA_TEXT, "Predicted age of ${viewModel.foundedAge.value?.name} is ${viewModel.foundedAge.value?.age}")
+            intent.type = "text/plain"
+            startActivity(Intent.createChooser(intent, "Share To:"))
         }
 
         return binding.root
