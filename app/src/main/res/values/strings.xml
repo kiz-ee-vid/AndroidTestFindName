@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AndroidTest</string>
+    <string name="app_name">TaskTest</string>
     <string name="title_main">Главная</string>
     <string name="title_favourites">Избранное</string>
     <string name="main_text">Введите имя для предсказания возраста</string>

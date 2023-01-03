@@ -11,7 +11,7 @@ interface NameDao {
     fun insert(prediction: Prediction)
 
     @Delete
-    fun delete(prediction: Prediction)
+    fun delete(predictionList: ArrayList<Prediction>)
 
     @Query("DELETE FROM prediction")
     fun clearTable()

@@ -57,13 +57,11 @@ class MainViewModel @Inject constructor(private val repository: RepositoryImpl) 
     }
 
     fun deleteChosen(chosenNames: ArrayList<Prediction>) {
+        CoroutineScope(Dispatchers.IO).launch() {
+            nameDao?.delete(chosenNames)
+        }
         chosenNames.forEach {
             favouriteNames.remove(it)
-            CoroutineScope(Dispatchers.IO).launch() {
-                chosenNames.forEach {
-                    nameDao?.delete(it)
-                }
-            }
         }
     }
 

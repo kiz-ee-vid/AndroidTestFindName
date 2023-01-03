@@ -75,6 +75,10 @@ class FavouritesAdapter(var itemClick: (Boolean) -> Unit) :
     }
 
     fun getChosen(): ArrayList<Prediction> {
-        return chosenNames
+        val data = ArrayList<Prediction>()
+        chosenNames.forEach {
+            data.add(it)
+        }
+        return data
     }
 }
