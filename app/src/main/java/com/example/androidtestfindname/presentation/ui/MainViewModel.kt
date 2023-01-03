@@ -1,4 +1,4 @@
-package com.example.androidtestfindname.presentation.ui.main
+package com.example.androidtestfindname.presentation.ui
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

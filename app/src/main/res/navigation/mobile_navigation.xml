@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/navigation_main"
-        android:name="com.example.androidtestfindname.presentation.ui.main.MainFragment"
+        android:name="com.example.androidtestfindname.presentation.ui.MainFragment"
         android:label="@string/title_main"
         tools:layout="@layout/fragment_main" />
 
     <fragment
         android:id="@+id/navigation_favourites"
-        android:name="com.example.androidtestfindname.presentation.ui.favourites.FavouritesFragment"
+        android:name="com.example.androidtestfindname.presentation.ui.FavouritesFragment"
         android:label="@string/title_favourites"
         tools:layout="@layout/fragment_favourites" />
 </navigation>

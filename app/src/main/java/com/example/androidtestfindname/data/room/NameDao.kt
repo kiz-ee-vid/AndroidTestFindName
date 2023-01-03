@@ -7,7 +7,7 @@ interface NameDao {
     @Query("SELECT * FROM prediction")
     fun getAll(): MutableList<Prediction>
 
-    @Insert(onConflict = OnConflictStrategy.ABORT)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(prediction: Prediction)
 
     @Delete

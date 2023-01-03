@@ -1,8 +1,7 @@
-package com.example.androidtestfindname.presentation.ui.favourites
+package com.example.androidtestfindname.presentation.ui
 
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,8 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidtestfindname.R
 import com.example.androidtestfindname.databinding.FragmentFavouritesBinding
-import com.example.androidtestfindname.presentation.ui.FavouritesAdapter
-import com.example.androidtestfindname.presentation.ui.main.MainViewModel
 
 class FavouritesFragment : Fragment() {
 

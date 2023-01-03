@@ -1,4 +1,4 @@
-package com.example.androidtestfindname.presentation.ui.main
+package com.example.androidtestfindname.presentation.ui
 
 import android.content.Intent
 import android.os.Bundle
