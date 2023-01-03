@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 
 @Entity
 @Parcelize
-data class Name(
+data class Prediction(
     @PrimaryKey
     var name: String,
     var age: Byte

@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import androidx.room.Database
 import androidx.room.Room
 
-@Database(entities = [Name::class], version = 1)
+@Database(entities = [Prediction::class], version = 1)
 abstract class NameDatabase : RoomDatabase() {
     abstract fun nameDao(): NameDao?
 

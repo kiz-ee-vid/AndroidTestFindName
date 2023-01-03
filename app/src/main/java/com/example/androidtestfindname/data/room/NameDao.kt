@@ -4,15 +4,15 @@ import androidx.room.*
 
 @Dao
 interface NameDao {
-    @Query("SELECT * FROM name")
-    fun getAll(): MutableList<Name>
+    @Query("SELECT * FROM prediction")
+    fun getAll(): MutableList<Prediction>
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    fun insert(name: Name)
+    fun insert(prediction: Prediction)
 
     @Delete
-    fun delete(nameList: ArrayList<Name>)
+    fun delete(prediction: Prediction)
 
-    @Query("DELETE FROM name")
+    @Query("DELETE FROM prediction")
     fun clearTable()
 }

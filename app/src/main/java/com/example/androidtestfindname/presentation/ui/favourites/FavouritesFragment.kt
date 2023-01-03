@@ -29,10 +29,6 @@ class FavouritesFragment : Fragment() {
     private lateinit var favouritesAdapter: FavouritesAdapter
     private val productRecycler: RecyclerView by lazy { binding.recyclerNames }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -61,16 +57,15 @@ class FavouritesFragment : Fragment() {
             .setTitle("Удалить Имя")
             .setMessage("Вы уверены что хотите удалить выбранное имя из избранных?")
             .setPositiveButton(
-                R.string.yes,
-                DialogInterface.OnClickListener { _, _ ->
-                    val chosenNames = favouritesAdapter.getChosen()
-                    viewModel.deleteChosen(chosenNames)
-                    favouritesAdapter.addList(viewModel.favouriteNames)
-                })
+                R.string.yes
+            ) { _, _ ->
+                val chosenNames = favouritesAdapter.getChosen()
+                viewModel.deleteChosen(chosenNames)
+                favouritesAdapter.addList(viewModel.favouriteNames)
+            }
             .setNeutralButton(
-                R.string.no,
-                DialogInterface.OnClickListener { _, _ ->}
-            )
+                R.string.no
+            ) { _, _ -> }
         return builder.create()
     }
 }

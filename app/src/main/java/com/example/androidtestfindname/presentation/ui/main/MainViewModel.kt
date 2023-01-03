@@ -3,8 +3,8 @@ package com.example.androidtestfindname.presentation.ui.main
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.androidtestfindname.data.RepositoryImpl
-import com.example.androidtestfindname.data.room.Name
 import com.example.androidtestfindname.data.room.NameDatabase
+import com.example.androidtestfindname.data.room.Prediction
 import com.example.androidtestfindname.presentation.di.App
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -19,10 +19,10 @@ class MainViewModel @Inject constructor(private val repository: RepositoryImpl) 
     private var db: NameDatabase = NameDatabase.getInstance(App.getContext()!!)
     private var nameDao = db.nameDao()
 
-    val foundedAge = MutableLiveData<Name?>()
+    val foundedAge = MutableLiveData<Prediction?>()
 
-    var favouriteNames = ArrayList<Name>().toMutableList()
-    var cachedRequests = ArrayList<Name>()
+    var favouriteNames = ArrayList<Prediction>().toMutableList()
+    var cachedRequests = ArrayList<Prediction>()
 
     init {
         CoroutineScope(Dispatchers.IO).launch() {
@@ -39,27 +39,35 @@ class MainViewModel @Inject constructor(private val repository: RepositoryImpl) 
                 val data = repository.getAge(name)
                 withContext(Dispatchers.Main) {
                     if (data != null) {
-                        foundedAge.value = Name(data.name, data.age ?: 0)
+                        foundedAge.value = Prediction(data.name, data.age ?: 0)
                     }
                 }
             }
-        else foundedAge.value = Name(name, cacheResult)
+        else foundedAge.value = Prediction(name, cacheResult)
     }
 
     fun addNameToFavourites() {
-        val data = Name(foundedAge.value!!.name, foundedAge.value!!.age ?: 0)
+        val data = Prediction(foundedAge.value!!.name, foundedAge.value!!.age ?: 0)
         if (!favouriteNames.contains(data)) {
             favouriteNames.add(data)
+            CoroutineScope(Dispatchers.IO).launch() {
+                nameDao?.insert(data)
+            }
         }
     }
 
-    fun deleteChosen(chosenNames: List<Name>) {
+    fun deleteChosen(chosenNames: ArrayList<Prediction>) {
         chosenNames.forEach {
             favouriteNames.remove(it)
+            CoroutineScope(Dispatchers.IO).launch() {
+                chosenNames.forEach {
+                    nameDao?.delete(it)
+                }
+            }
         }
     }
 
-    private fun checkCache(name: String): Byte?{
+    private fun checkCache(name: String): Byte? {
         cachedRequests.forEach {
             if (it.name == name)
                 return it.age

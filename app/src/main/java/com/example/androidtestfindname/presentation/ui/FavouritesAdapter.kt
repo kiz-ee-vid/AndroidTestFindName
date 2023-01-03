@@ -6,17 +6,17 @@ import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.androidtestfindname.data.room.Name
+import com.example.androidtestfindname.data.room.Prediction
 import com.example.androidtestfindname.databinding.ItemFavouriteBinding
 
 class FavouritesAdapter(var itemClick: (Boolean) -> Unit) :
     RecyclerView.Adapter<FavouritesAdapter.MenuHolder>() {
 
-    private var namesList = ArrayList<Name>()
+    private var namesList = ArrayList<Prediction>()
     private var withCheckbox = false
     private var showDeleteButton = false
     var checkedNum = 0
-    private var chosenNames = ArrayList<Name>()
+    private var chosenNames = ArrayList<Prediction>()
 
     inner class MenuHolder(val binding: ItemFavouriteBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -55,7 +55,7 @@ class FavouritesAdapter(var itemClick: (Boolean) -> Unit) :
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addList(names: List<Name>) {
+    fun addList(names: List<Prediction>) {
         namesList.clear()
         namesList.addAll(names)
         resetSelection()
@@ -74,7 +74,7 @@ class FavouritesAdapter(var itemClick: (Boolean) -> Unit) :
         return namesList.size
     }
 
-    fun getChosen(): List<Name> {
+    fun getChosen(): ArrayList<Prediction> {
         return chosenNames
     }
 }
