@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.androidtestfindname.databinding.FragmentMainBinding
@@ -16,6 +17,8 @@ class MainFragment : Fragment() {
 
     private val binding: FragmentMainBinding by lazy { FragmentMainBinding.inflate(layoutInflater) }
     private val viewModel: MainViewModel by activityViewModels()
+
+    val pattern = "[A-Za-z]+".toRegex()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +37,14 @@ class MainFragment : Fragment() {
             }
 
             override fun onQueryTextSubmit(query: String): Boolean {
+                if (!query.matches(pattern)) {
+                    Toast.makeText(context, "Use only Latin characters", Toast.LENGTH_SHORT).show()
+                    return true
+                }
+                if (query.length > 15) {
+                    Toast.makeText(context, "The name is too long", Toast.LENGTH_SHORT).show()
+                    return true
+                }
                 viewModel.getAge(query)
                 return false
             }
